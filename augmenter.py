@@ -72,41 +72,42 @@ saltpepper3 = au.SaltAndPepper(p=0.3)
 pppt1 = au.PerspectiveTransform(scale=0.075)
 pppt2 = au.PerspectiveTransform(scale=0.1)
 
-operation = {'flip':flipper,
-'vflip':vflipper,
-# 'gblur1':gblurer_zero_degree,
+operation = {
+# 'flip':flipper,
+# 'vflip':vflipper,
+'gblur1':gblurer_zero_degree,
 'gblur2':gblurer_one_degree,
 'gblur3':gblurer_two_degree,
 'gblur4':gblurer_three_degree,
-'trans':translater,
+# 'trans':translater,
 # 'scl1':scaler1,
-'scl2':scaler2,
-'scl3':scaler3,
+# 'scl2':scaler2,
+# 'scl3':scaler3,
 # 'sp75':superpixeler75,
 # 'sp100':superpixeler100,
 # 'sp125':superpixeler125,
-# 'addm45':adder_min45,
+'addm45':adder_min45,
 'addm25':adder_min25,
 'addp25':adder_plus25,
-# 'addp45':adder_plus45,
+'addp45':adder_plus45,
 # 'addhm45':addHS_min45,
 # 'addhm25':addHS_min25,
 # 'addhp25':addHS_plus25,
 # 'addhp45':addHS_plus45,
 # 'mt1':multiplyer1,
 'mt2':multiplyer2,
-'mt3':multiplyer3,
-'mte1':multiplyerE1,
-'mte1pc1':multiplyerE1,
+# 'mt3':multiplyer3,
+# 'mte1':multiplyerE1,
+# 'mte1pc1':multiplyerE1,
 # 'mte1pc1':multiplyerE1pc1,
 # 'mte1pc2':multiplyerE1pc2,
 'mte2':multiplyerE2,
 # 'mte2pc1':multiplyerE2pc1,
 # 'mte2pc2':multiplyerE2pc2,
-'mte3':multiplyerE3,
+# 'mte3':multiplyerE3,
 # 'mte3pc1':multiplyerE3pc1,
 # 'mte3pc2':multiplyerE3pc2,
-'do1':dropouter1,
+# 'do1':dropouter1,
 # 'do1pc1':dropouter1pc1,
 # 'do1pc2':dropouter1pc2,
 'do2':dropouter2,
@@ -114,14 +115,14 @@ operation = {'flip':flipper,
 # 'do2pc2':dropouter2pc2,
 'cdp1':coarsedp1,
 # 'cdp1pc1':coarsedp1pc1,
-'cdp2':coarsedp2,
+# 'cdp2':coarsedp2,
 # 'cdp2pc1':coarsedp2pc1,
-'cnt1':contrastnorm1,
+# 'cnt1':contrastnorm1,
 # 'cnt1pc1':contrastnorm1pc1,
-'cnt2':contrastnorm2,
+# 'cnt2':contrastnorm2,
 # 'cnt2pc1':contrastnorm2pc1,
-'rot1':rotasi1,
-'rot2':rotasi2,
+# 'rot1':rotasi1,
+# 'rot2':rotasi2,
 # 'avgblur1':avgbluer1,
 # 'avgblur2':avgbluer2,
 # 'avgblur3':avgbluer3,
@@ -130,10 +131,10 @@ operation = {'flip':flipper,
 # 'medblur3':medbluer3,
 # 'shpr1':shapener1,
 'shpr2':shapener2,
-'shpr3':shapener3,
+# 'shpr3':shapener3,
 'gn':gaussianNoise,
-# 'spt1':saltpepper1,
-'spt2':saltpepper2,
+'spt1':saltpepper1,
+# 'spt2':saltpepper2,
 'spt3':saltpepper3,
 'ppt1':pppt1,
 # 'ppt2':pppt2,
@@ -146,8 +147,14 @@ operation = {'flip':flipper,
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
 
+# print(len(operation))
+
 path = 'F:\FSR\dataset\skin-cancer-mnist-ham10000\Locat'
 path2='F:\FSR\dataset\skin-cancer-mnist-ham10000\Locataug'
+
+lanjut = input('Jumlah operasi :'+str(len(operation))+' Di lanjutkan? (y/n)')
+if lanjut.lower() == 'n':
+    exit()
 for cat_folder in os.listdir(path):
     print('-', cat_folder)
     for sub_cat_folder in os.listdir(path+'//'+cat_folder):
@@ -158,15 +165,15 @@ for cat_folder in os.listdir(path):
             image_name = image_name.replace('.jpg', '')
             # print('\t\t------ ',image_name)
             image = cv2.imread(image_path)
-            for key1 in operation.keys():
-                print('\t\t\t--- ', str(key1))
-                temp = operation[key1].augment_image(image)
-                cv2.imwrite(image_name+'_'+str(key1)+'.jpg', temp)
-                for key2 in operation.keys():
-                    print('\t\t\t\t----- ', str(key2))
-                    temp = operation[key1].augment_image(image)
-                    temp = operation[key2].augment_image(temp)
-                    cv2.imwrite(image_name+'_'+str(key1)+'_'+str(key2)+'.jpg', temp)
+            # Ngga ada yang bisa dipakai dibawah ini
+            # for key1 in operation.keys():
+            #     print('\t\t\t--- ', str(key1))
+            #     temp = operation[key1].augment_image(image)
+            #     cv2.imwrite(image_name+'_'+str(key1)+'.jpg', temp)
+            #     for key2 in operation.keys():
+            #         print('\t\t\t\t----- ', str(key2))
+            #         temp = operation[key1].augment_image(image)
+            #         temp = operation[key2].augment_image(temp)
+            #         cv2.imwrite(image_name+'_'+str(key1)+'_'+str(key2)+'.jpg', temp)
 
 print('Done')
-print(len(operation))
