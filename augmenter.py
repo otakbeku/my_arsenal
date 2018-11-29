@@ -101,7 +101,7 @@ operation = {
 # 'mte1pc1':multiplyerE1,
 # 'mte1pc1':multiplyerE1pc1,
 # 'mte1pc2':multiplyerE1pc2,
-'mte2':multiplyerE2,
+# 'mte2':multiplyerE2,
 # 'mte2pc1':multiplyerE2pc1,
 # 'mte2pc2':multiplyerE2pc2,
 # 'mte3':multiplyerE3,
