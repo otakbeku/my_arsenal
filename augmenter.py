@@ -110,7 +110,7 @@ operation = {
 # 'do1':dropouter1,
 # 'do1pc1':dropouter1pc1,
 # 'do1pc2':dropouter1pc2,
-'do2':dropouter2,
+# 'do2':dropouter2,
 # 'do2pc1':dropouter2pc1,
 # 'do2pc2':dropouter2pc2,
 'cdp1':coarsedp1,
@@ -136,8 +136,8 @@ operation = {
 'spt1':saltpepper1,
 # 'spt2':saltpepper2,
 'spt3':saltpepper3,
-'ppt1':pppt1,
-# 'ppt2':pppt2,
+# 'ppt1':pppt1,
+'ppt2':pppt2,
 }
 # Testing 
 # image = cv2.imread('contoh.jpg')
@@ -152,9 +152,10 @@ operation = {
 path = 'F:\FSR\dataset\skin-cancer-mnist-ham10000\Locat'
 path2='F:\FSR\dataset\skin-cancer-mnist-ham10000\Locataug'
 
-lanjut = input('Jumlah operasi :'+str(len(operation))+' Di lanjutkan? (y/n)')
+lanjut = input('Jumlah operasi : '+str(len(operation))+' Di lanjutkan? (y/n)')
 if lanjut.lower() == 'n':
     exit()
+
 for cat_folder in os.listdir(path):
     print('-', cat_folder)
     for sub_cat_folder in os.listdir(path+'//'+cat_folder):
@@ -165,15 +166,16 @@ for cat_folder in os.listdir(path):
             image_name = image_name.replace('.jpg', '')
             # print('\t\t------ ',image_name)
             image = cv2.imread(image_path)
-            # Ngga ada yang bisa dipakai dibawah ini
-            # for key1 in operation.keys():
-            #     print('\t\t\t--- ', str(key1))
-            #     temp = operation[key1].augment_image(image)
-            #     cv2.imwrite(image_name+'_'+str(key1)+'.jpg', temp)
-            #     for key2 in operation.keys():
-            #         print('\t\t\t\t----- ', str(key2))
-            #         temp = operation[key1].augment_image(image)
-            #         temp = operation[key2].augment_image(temp)
-            #         cv2.imwrite(image_name+'_'+str(key1)+'_'+str(key2)+'.jpg', temp)
+            
+            for key1 in operation.keys():
+                print('\t\t\t--- ', str(key1))
+                temp = operation[key1].augment_image(image)
+                cv2.imwrite(image_name+'_'+str(key1)+'.jpg', temp)
+                # Ngga ada yang bisa dipakai dibawah ini
+                # for key2 in operation.keys():
+                #     print('\t\t\t\t----- ', str(key2))
+                #     temp = operation[key1].augment_image(image)
+                #     temp = operation[key2].augment_image(temp)
+                #     cv2.imwrite(image_name+'_'+str(key1)+'_'+str(key2)+'.jpg', temp)
 
 print('Done')
